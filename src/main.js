@@ -1,12 +1,8 @@
-// Endless Runner
-// Name: Josh Gioffre
-// Date: 1/13/25
+// Polybius
+// Names: Nikolas Makranyi, Josh Gioffre
+// Date: 3/7/25
 
-// Around 6-8 hours spent
-
-// Creative Tilt - One mechanic I haven't really seen with endless runners is the ability to change the difficulty
-// while you're actively playing the game. I decided to make this mechanic using the ship's engine, where going faster
-// rewards the player with more points.
+// Around  hours spent
 
 "use strict"
 
@@ -20,7 +16,7 @@ let config = {
             debug: false
         }
     },
-    scene: [MainMenu, Play]
+    scene: [Title, MainMenu, Play]
 }
 
 let game = new Phaser.Game(config)

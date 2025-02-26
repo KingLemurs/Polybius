@@ -4,15 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Making a Scene</title>
+    <style>
+        @font-face {
+            font-family: 'PolybiusFont';
+            src: url('assets/fonts/Polybius1981.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+    </style>
 
     <!--loading order matters-->
     <script src="./lib/phaser.js"></script>
     <script src="./lib/StateMachine.js"></script>
+    <script src="./src/scenes/Title.js"></script>
     <script src="./src/scenes/Play.js"></script>
     <script src="./src/scenes/MainMenu.js"></script>
     <script src="./src/main.js"></script>
 </head>
 <body>
     <!-- Phaser will handle the <body> tag for us 💪 -->
+    <p style="font-family: 'PolybiusFont'; visibility: hidden; position: absolute;">.</p>
 </body>
 </html>
