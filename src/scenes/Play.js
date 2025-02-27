@@ -8,7 +8,7 @@ class Play extends Phaser.Scene {
         this.background = this.add.sprite(0, 0,"background").setOrigin(0, 0);
         this.background2 = this.add.sprite(800, 0,"background").setOrigin(0, 0);
 
-        this.player = new Player(this, 100, 100, "packet")
+        this.player = new Player(this, 100, 100, "spaceship")
         this.player.setCollideWorldBounds(true);
         this.player.setImmovable(true);
 
@@ -184,13 +184,5 @@ class Play extends Phaser.Scene {
                 delay: 0});
         }
 
-
-        if (this.background.x <= -800) {
-            this.background.x = 800;
-        }
-
-        if (this.background2.x <= -800) {
-            this.background2.x = 800;
-        }
     }
 }

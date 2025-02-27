@@ -11,10 +11,6 @@ class Title extends Phaser.Scene {
     }
 
     init() {
-        console.log("init")
-        this.HP = 100
-        this.EXP = 0
-        console.log(`HP: ${this.HP} EXP: ${this.EXP}`)
     }
 
     create() {
