@@ -56,6 +56,7 @@ class Title extends Phaser.Scene {
         this.add.text(game.config.width/2, game.config.height/2 + 64, '(C) 1981 SINNESLOCHEN INC', scoreConfig).setOrigin(0.5)
         this.add.text(game.config.width/2, game.config.height/2 + 100, 'CREDITS: 0', scoreConfig).setOrigin(0.5)
         this.add.text(game.config.width/2, game.config.height/2 + 136, 'PRESS SPACE TO START', scoreConfig).setOrigin(0.5)
+        this.add.text(game.config.width/2, game.config.height/2 + 172, 'BY NIKOLAS MAKRANYI AND JOSH GIOFFRE', scoreConfig).setOrigin(0.5)
     }
 
     update() {
