@@ -33,7 +33,7 @@ let GAME_SPEED = [2, 4, 6, 8, 10];
 let BLOCK_SPEED = [10, 15, 20, 35, 60];
 let ENGINE_RATE = [0.6, 0.8, 1, 1.2, 1.4];
 
-let KEY_ENGINE_UP, KEY_ENGINE_DOWN, KEY_RESET, KEY_MENU, KEY_START;
+let KEY_LEFT, KEY_RIGHT, KEY_RESET, KEY_MENU, KEY_START, KEY_FIRE;
 
 // story of game - you are a byte packet traveling through the internet trying to reach your destination.
 // Starts off with a computer command being typed into a command line "GET /index.html HTTP/1.1/"
