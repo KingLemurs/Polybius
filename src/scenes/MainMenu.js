@@ -1,6 +1,6 @@
 let scoreConfig = {
     fontFamily: 'PolybiusFont',
-    fontSize: '40px',
+    fontSize: '32px',
     color: '#ffffff',
     align: 'left',
     padding: {
@@ -50,7 +50,7 @@ class MainMenu extends Phaser.Scene {
 
         this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (Space) to start', scoreConfig).setOrigin(0.5)
         this.add.text(game.config.width/2, game.config.height/2 - 128,
-            'Control your ship by using the left and right arrow keys', scoreConfig).setOrigin(0.5)
+            'Control your ship by using the left, right, up, and down arrow keys', scoreConfig).setOrigin(0.5)
         this.add.text(game.config.width/2, game.config.height/2 - 64,
             'Press (Space) to shoot', scoreConfig).setOrigin(0.5)
         this.add.text(game.config.width/2, game.config.height/2 - 32,

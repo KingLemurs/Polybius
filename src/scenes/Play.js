@@ -30,12 +30,37 @@ class Play extends Phaser.Scene {
 
         KEY_LEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         KEY_RIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
+        KEY_UP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
+        KEY_DOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
         KEY_FIRE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         KEY_RESET = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
         KEY_MENU = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
     }
 
     update() {
-
+        if(KEY_LEFT.isDown){
+            console.log("left")
+            this.player.x = 75;
+            this.player.y = 300;
+            this.player.angle = 180;
+        }
+        else if(KEY_RIGHT.isDown){
+            console.log("right")
+            this.player.x = 700;
+            this.player.y = 300;
+            this.player.angle = 360;
+        }
+        else if(KEY_UP.isDown){
+            console.log("up")
+            this.player.x = 387.5;
+            this.player.y = 100;
+            this.player.angle = 270;
+        }
+        else if(KEY_DOWN.isDown){
+            console.log("down")
+            this.player.x = 387.5;
+            this.player.y = 500;
+            this.player.angle = 90;
+        }
     }
 }

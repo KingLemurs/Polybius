@@ -11,6 +11,22 @@ class Player extends Phaser.GameObjects.Sprite {
 
     update(){
         // left/right movement
+        if(KEY_LEFT.isDown){
+            console.log("left")
+            this.x = -700;
+            this.y = 300;
+        }
+        else if(KEY_RIGHT.isDown){
+            console.log("right")
+            this.x = 700;
+            this.y = 300;
+        }
+        else if(KEY_UP.isDown){
+            this.x -= this.moveSpeed;
+        }
+        else if(KEY_DOWN.isDown){
+            this.x += this.moveSpeed;
+        }
         // fire button
         if (Phaser.Input.Keyboard.JustDown(KEY_FIRE) && !this.isFiring) {
             this.isFiring = true
