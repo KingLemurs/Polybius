@@ -6,6 +6,7 @@ class Play extends Phaser.Scene {
 
     create() {
         this.player = new Player(this, 700, 300, "spaceship")
+        this.entity = new TheEntity(this, 387.5, 300, "entity")
 
         let scoreConfig = {
             fontFamily: 'Arial',
@@ -20,6 +21,8 @@ class Play extends Phaser.Scene {
 
         this.engineText = this.add.text(10, 40, `Engine Level: ${this.player.engineLevel}`, scoreConfig);
         this.scoreText = this.add.text(10, 20, `Score: 0`, scoreConfig);
+        this.level = 1;
+        this.gameOver = false;
 
         //this.cameras.main.startFollow(this.player, false, 1, 0, -100);
         this.cameras.main.setDeadzone(200, 200);
@@ -38,29 +41,26 @@ class Play extends Phaser.Scene {
     }
 
     update() {
-        if(KEY_LEFT.isDown){
-            console.log("left")
-            this.player.x = 75;
-            this.player.y = 300;
-            this.player.angle = 180;
+        if(!this.gameOver) {               
+            this.player.update();         
         }
-        else if(KEY_RIGHT.isDown){
-            console.log("right")
-            this.player.x = 700;
-            this.player.y = 300;
-            this.player.angle = 360;
-        }
-        else if(KEY_UP.isDown){
-            console.log("up")
-            this.player.x = 387.5;
-            this.player.y = 100;
-            this.player.angle = 270;
-        }
-        else if(KEY_DOWN.isDown){
-            console.log("down")
-            this.player.x = 387.5;
-            this.player.y = 500;
-            this.player.angle = 90;
+        this.time.addEvent({
+            delay: Phaser.Math.Between(4000, 15000),
+            callback: this.showMessage,
+            callbackScope: this,
+            loop: true
+        });
+    }
+
+    showMessage() {
+        if(this.gameOver === false) {
+            this.message = this.add.text(10, 40, 'Homing Missiles Incoming', { fontFamily: 'Arial', fontSize: '20px', color: '#FFFFFF', align: 'left', padding: { top: 5, bottom: 5, }, });
+            this.time.addEvent({
+                delay: 3000,
+                callback: this.message.destroy(),
+                callbackScope: this,
+                loop: false
+            });
         }
     }
 }
