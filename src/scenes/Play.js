@@ -8,6 +8,8 @@ class Play extends Phaser.Scene {
         this.player = new Player(this, 700, 300, "spaceship")
         this.entity = new TheEntity(this, 387.5, 300, "entity")
 
+        this.test = this.add.sprite(config.width / 2, config.height / 2, "test");
+
         let scoreConfig = {
             fontFamily: 'Arial',
             fontSize: '20px',

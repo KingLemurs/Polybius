@@ -16,9 +16,16 @@ class MainMenu extends Phaser.Scene {
     }
 
     preload() {
-        this.load.audio('sfx-shot', './assets/audio/sfx-shot.wav')
-        this.load.image('spaceship', './assets/sprites/spaceship.png')
-        this.load.image('entity', './assets/sprites/entity.png')
+        // Load Sprites
+        this.load.path = "./assets/sprites/";
+        this.load.image('spaceship', 'spaceship.png')
+        this.load.image('test', 'test.png')
+        this.load.image('core', 'Core.png')
+        this.load.image('entity', 'entity.png')
+
+        // Load Audio
+        this.load.path = "./assets/audio/";
+        this.load.audio('sfx-shot', 'sfx-shot.wav');
     }
 
     init() {
