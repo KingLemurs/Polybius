@@ -28,10 +28,6 @@ class MainMenu extends Phaser.Scene {
         this.load.audio('sfx-shot', 'sfx-shot.wav');
     }
 
-    init() {
-        this.HP = 6
-    }
-
     create() {
         console.log("scene created")
 

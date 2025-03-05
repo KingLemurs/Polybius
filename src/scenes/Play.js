@@ -5,10 +5,21 @@ class Play extends Phaser.Scene {
     }
 
     create() {
+        this.physics.world.setFPS(60)
         this.player = new Player(this, 700, 300, "spaceship")
-        this.entity = new TheEntity(this, 387.5, 300, "entity")
+            //this.entity = new TheEntity(this, 387.5, 300, "entity")
 
-        this.test = this.add.sprite(config.width / 2, config.height / 2, "test");
+        this.core = new TheEntity(this, config.width / 2, config.height / 2, "core");
+
+        this.core.angle = .01;
+        this.mirrorCore = this.add.sprite(config.width / 2, config.height / 2, "core");
+        this.mirrorCoreDir = -1;
+
+        this.core.on('attack', () => {
+            this.mirrorCoreDir = this.core.direction;
+            console.log(`hi ${this.mirrorCoreDir}`)
+        });
+
 
         let scoreConfig = {
             fontFamily: 'Arial',
@@ -21,8 +32,8 @@ class Play extends Phaser.Scene {
             },
         }
 
-        this.engineText = this.add.text(10, 40, `Engine Level: ${this.player.engineLevel}`, scoreConfig);
-        this.scoreText = this.add.text(10, 20, `Score: 0`, scoreConfig);
+        // this.engineText = this.add.text(10, 40, `Engine Level: ${this.player.engineLevel}`, scoreConfig);
+        // this.scoreText = this.add.text(10, 20, `Score: 0`, scoreConfig);
         this.level = 1;
         this.gameOver = false;
 
@@ -52,6 +63,9 @@ class Play extends Phaser.Scene {
             callbackScope: this,
             loop: true
         });
+
+        this.core.update();
+        this.mirrorCore.angle += .0777 * this.mirrorCoreDir;
     }
 
     showMessage() {
