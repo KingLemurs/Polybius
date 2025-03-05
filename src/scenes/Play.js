@@ -12,7 +12,6 @@ class Play extends Phaser.Scene {
             duration: 4000,
             ease: "sine-inout"
         })
-        this.cutsceneTween.on('complete', () => {this.cutscene = false});
 
         this.cameras.main.zoom = .2;
         this.cutsceneTween.play();
@@ -31,6 +30,22 @@ class Play extends Phaser.Scene {
             this.mirrorCoreDir = this.core.direction;
             console.log(`hi ${this.mirrorCoreDir}`)
         });
+
+        this.mirrorTween = this.tweens.add({
+            targets: this.mirrorCore,
+            duration: 8000,
+            scaleY: -1,
+            paused: true,
+            ease: 'sine-inout',
+            yoyo: true,
+        })
+
+        this.cutsceneTween.on('complete', () => {
+            this.cutscene = false;
+            this.mirrorTween.play();
+            this.mirrorTween.paused = false;
+        });
+
 
         // this.engineText = this.add.text(10, 40, `Engine Level: ${this.player.engineLevel}`, scoreConfig);
         // this.scoreText = this.add.text(10, 20, `Score: 0`, scoreConfig);
