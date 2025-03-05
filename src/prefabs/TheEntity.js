@@ -46,7 +46,7 @@ class TheEntity extends Phaser.Physics.Arcade.Sprite {
             this.aggression = 0;
             // atleast 5 seconds
             this.stateTimer = Phaser.Math.Between(300, 900)
-            this.newSpeed = Phaser.Math.Between(3, 5) / 10;
+            this.newSpeed = Phaser.Math.Between(30, 50) / 100;
             this.emit('attack');
         }
         else {
@@ -54,7 +54,7 @@ class TheEntity extends Phaser.Physics.Arcade.Sprite {
             this.aggression += 1;
             // atleast 3 seconds
             this.stateTimer = Phaser.Math.Between(180, 900)
-            this.newSpeed = Phaser.Math.Between(.5, 2) / 10;
+            this.newSpeed = Phaser.Math.Between(10, 20) / 100;
         }
         let newDir = Phaser.Math.Between(0, 1);
         if (newDir === 0) {
@@ -67,6 +67,17 @@ class TheEntity extends Phaser.Physics.Arcade.Sprite {
         else {
             this.direction = -1;
         }
+
+        // change number (visual)
+        let display = Phaser.Math.Between(0,30);
+        let img = 'coresix';
+        if (display === 0) {
+            img = 'coreeight'
+        }
+        else if (display === 1 ) {
+            img = 'coreone'
+        }
+        this.setTexture(img);
     }
 
     update(){
