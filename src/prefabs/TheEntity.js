@@ -16,6 +16,7 @@ class TheEntity extends Phaser.Physics.Arcade.Sprite {
         this.rotSpeed = .1;
         this.newSpeed = 0;
         this.tweenTime = 0;
+        this.health = 100;
 
         /*
          CORE has 2 states it can be in:

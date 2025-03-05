@@ -12,7 +12,6 @@ let scoreConfig = {
 class MainMenu extends Phaser.Scene {
     constructor() {
         super("mainMenu");
-
     }
 
     preload() {
@@ -22,6 +21,7 @@ class MainMenu extends Phaser.Scene {
         this.load.image('test', 'test.png')
         this.load.image('core', 'Core.png')
         this.load.image('entity', 'entity.png')
+        this.load.image('laser', 'laser.png')
 
         // Load Audio
         this.load.path = "./assets/audio/";
@@ -30,7 +30,6 @@ class MainMenu extends Phaser.Scene {
 
     create() {
         console.log("scene created")
-
         let playerStats = {
             HP: this.HP,
         }

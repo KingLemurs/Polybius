@@ -1,13 +1,11 @@
-// Player prefab
-class Player extends Phaser.GameObjects.Sprite {
+// Laser prefab
+class Laser extends Phaser.GameObjects.Sprite {
     constructor(scene, x, y, texture, frame) {
       super(scene, x, y, texture, frame);
       // add object to existing scene
       scene.add.existing(this);
-      this.isFiring = false;
-      this.moveSpeed = 2;
-      this.health = 6;
-      this.sfxShot = scene.sound.add('sfx-shot');
+      this.setActive(false)
+      this.setVisible(false);
     }
 
     update(){
@@ -20,7 +18,7 @@ class Player extends Phaser.GameObjects.Sprite {
         }
         else if(KEY_RIGHT.isDown){
             console.log("right")
-            this.x = 725;
+            this.x = 700;
             this.y = 300;
             this.angle = 360;
         }
