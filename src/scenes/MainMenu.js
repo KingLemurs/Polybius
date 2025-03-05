@@ -19,9 +19,12 @@ class MainMenu extends Phaser.Scene {
         this.load.path = "./assets/sprites/";
         this.load.image('spaceship', 'spaceship.png')
         this.load.image('test', 'test.png')
-        this.load.image('core', 'Core.png')
+        this.load.image('coresix', 'coreSix.png')
+        this.load.image('coreeight', 'coreEight.png')
+        this.load.image('coreone', 'coreOne.png')
+        this.load.image('mirrorcore', 'mirrorCore.png')
         this.load.image('entity', 'entity.png')
-        this.load.image('laser', 'laser.png')
+        this.load.image('laser', 'beamTets.png')
 
         // Load Audio
         this.load.path = "./assets/audio/";

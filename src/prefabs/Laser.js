@@ -1,29 +1,17 @@
 // Laser prefab
-class Laser extends Phaser.GameObjects.Sprite {
+class Laser extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y, texture, frame) {
       super(scene, x, y, texture, frame);
       // add object to existing scene
-      scene.add.existing(this);
-      this.setActive(false)
-      this.setVisible(false);
+        scene.physics.add.existing(this);
+        scene.add.existing(this);
     }
 
-    update(){
-        // left/right movement
-        // fire button
-        if (Phaser.Input.Keyboard.JustDown(KEY_FIRE) && !this.isFiring) {
-            this.setActive(true)
-            this.setVisible(true)
-            this.isFiring = true
-            this.sfxShot.play()
+    update() {
+        this.x -= 1.5;
+
+        if (this.x < 0 - 16 || this.x > config.width + 16) {
+            this.destroy();
         }
-    }
-
-    // reset rocket "to ground"
-    reset() {
-        this.isFiring = false;
-        this.setActive(false);
-        this.setVisible(false); 
-        this.y = game.config.height - borderUISize - borderPadding;
     }
 }

@@ -2,24 +2,50 @@ class Play extends Phaser.Scene {
     constructor() {
         // name of scene to phaser
         super("playScene")
+        this.cutscene = true;
     }
 
     create() {
+        this.cutsceneTween = this.tweens.add({
+            targets: this.cameras.main,
+            zoom: .8,
+            duration: 4000,
+            ease: "sine-inout"
+        })
+
+        this.cameras.main.zoom = .2;
+        this.cutsceneTween.play();
         this.physics.world.setFPS(60)
-        this.player = new Player(this, 725, 300, "spaceship")
-        this.laser = new Laser(this, 725, 300, "laser")
+        this.player = new Player(this, config.width - 100, config.height / 2, "spaceship")
+        // this.laser = new Laser(this, 725, 300, "laser")
             //this.entity = new TheEntity(this, 387.5, 300, "entity")
 
-        this.core = new TheEntity(this, config.width / 2, config.height / 2, "core");
+        this.core = new TheEntity(this, config.width / 2, config.height / 2, "coresix");
 
         this.core.angle = .01;
-        this.mirrorCore = this.add.sprite(config.width / 2, config.height / 2, "core");
+        this.mirrorCore = this.add.sprite(config.width / 2, config.height / 2, "mirrorcore");
         this.mirrorCoreDir = -1;
 
         this.core.on('attack', () => {
             this.mirrorCoreDir = this.core.direction;
             console.log(`hi ${this.mirrorCoreDir}`)
         });
+
+        this.mirrorTween = this.tweens.add({
+            targets: this.mirrorCore,
+            duration: 8000,
+            scaleY: -1,
+            paused: true,
+            ease: 'sine-inout',
+            yoyo: true,
+        })
+
+        this.cutsceneTween.on('complete', () => {
+            this.cutscene = false;
+            this.mirrorTween.play();
+            this.mirrorTween.paused = false;
+        });
+
 
         // this.engineText = this.add.text(10, 40, `Engine Level: ${this.player.engineLevel}`, scoreConfig);
         // this.scoreText = this.add.text(10, 20, `Score: 0`, scoreConfig);
@@ -50,7 +76,7 @@ class Play extends Phaser.Scene {
             align: 'left',
         }
 
-        if(!this.gameOver) {               
+        if(!this.gameOver && !this.cutscene) {
             this.player.update();         
         }
         if(this.player.health <= 0) {               
@@ -80,6 +106,8 @@ class Play extends Phaser.Scene {
             callbackScope: this,
             loop: true
         });
+
+        if (this.cutscene) return;
 
         this.core.update();
         this.mirrorCore.angle += .0777 * this.mirrorCoreDir;

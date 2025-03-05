@@ -8,21 +8,19 @@ class Player extends Phaser.GameObjects.Sprite {
       this.moveSpeed = 2;
       this.health = 6;
       this.sfxShot = scene.sound.add('sfx-shot');
+      this.lasers = scene.add.group();
+      this.lasers.runChildUpdate = true;
     }
 
     update(){
         // left/right movement
         if(KEY_LEFT.isDown){
             console.log("left")
-            this.x = 75;
-            this.y = 300;
-            this.angle = 180;
+            this.x -= this.moveSpeed;
         }
         else if(KEY_RIGHT.isDown){
             console.log("right")
-            this.x = 725;
-            this.y = 300;
-            this.angle = 360;
+            this.x += this.moveSpeed;
         }
         else if(KEY_UP.isDown){
             console.log("up")
@@ -39,7 +37,11 @@ class Player extends Phaser.GameObjects.Sprite {
         // fire button
         if (Phaser.Input.Keyboard.JustDown(KEY_FIRE) && !this.isFiring) {
             this.isFiring = true
+            let laser = new Laser(this.scene, this.x, this.y, 'laser');
+            this.lasers.add(laser);
+            //laser.body.set
             this.sfxShot.play()
+            this.isFiring = false;
         }
     }
 
