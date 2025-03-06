@@ -26,14 +26,12 @@ class Player extends Phaser.GameObjects.Sprite {
         }
         else if(KEY_UP.isDown){
             console.log("up")
-            this.x = 387.5;
-            this.y = 50;
+            this.y = 0;
             this.angle = 270;
         }
         else if(KEY_DOWN.isDown){
             console.log("down")
-            this.x = 387.5;
-            this.y = 550;
+            this.y = 800;
             this.angle = 90;
         }
         // fire button
