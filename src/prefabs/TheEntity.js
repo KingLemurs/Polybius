@@ -9,13 +9,16 @@ class TheEntity extends Phaser.Physics.Arcade.Sprite {
         this.state = "idle";
 
         // enemy groups
-        this.greens = [] // max 10
-        this.yellows = [] // max 10
-        this.purples = [] // max 5
-        this.reds = [] // max 5
+        this.greens = new Array(10).fill(null); // max 10
+        this.yellows = new Array(10).fill(null); // max 10
+        this.purples = new Array(5).fill(null); // max 5
+        this.reds = new Array(5).fill(null); // max 5
+
+        console.log(this.greens)
 
         // 1 seconds at start
         this.stateTimer = 60
+        this.spawnTimer = 120;
         this.direction = -1
         // every time state rolls idle
         this.aggression = 0
@@ -86,6 +89,24 @@ class TheEntity extends Phaser.Physics.Arcade.Sprite {
         this.setTexture(img);
     }
 
+    spawnEnemy() {
+        let nextEmpty = -1;
+        for (let i = 0; i < this.greens.length; i++) {
+            if (this.greens[i] == null) {
+                nextEmpty = i;
+                break;
+            }
+        }
+        this.spawnTimer = 120;
+
+        // if all enemies are alive
+        if (nextEmpty < 0) {
+            return;
+        }
+
+        this.greens[nextEmpty] = new Enemy(this.scene, this.x, this.y, 'green', 0, this, nextEmpty);
+    }
+
     update(){
         this.angle += this.rotSpeed;
         if (this.state === "idle") {
@@ -101,6 +122,17 @@ class TheEntity extends Phaser.Physics.Arcade.Sprite {
         if (this.tweenTime <= 180) {
             this.rotSpeed = Phaser.Math.Interpolation.SmoothStep(this.tweenTime / 180, this.rotSpeed, this.newSpeed);
             this.tweenTime++
+        }
+
+        this.spawnTimer -= 1;
+        if (this.spawnTimer <= 0) {
+            this.spawnEnemy();
+        }
+
+        for (let i = 0; i < this.greens.length; i++) {
+            if (this.greens[i]) {
+                this.greens[i].update();
+            }
         }
     }
 }
