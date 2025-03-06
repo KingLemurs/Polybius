@@ -8,6 +8,12 @@ class TheEntity extends Phaser.Physics.Arcade.Sprite {
         scene.add.existing(this);
         this.state = "idle";
 
+        // enemy groups
+        this.greens = [] // max 10
+        this.yellows = [] // max 10
+        this.purples = [] // max 5
+        this.reds = [] // max 5
+
         // 1 seconds at start
         this.stateTimer = 60
         this.direction = -1

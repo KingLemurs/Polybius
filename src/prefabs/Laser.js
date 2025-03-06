@@ -8,9 +8,11 @@ class Laser extends Phaser.Physics.Arcade.Sprite {
     }
 
     update() {
-        this.x -= 1.5;
-
+        this.angle += .25;
         if (this.x < 0 - 16 || this.x > config.width + 16) {
+            this.destroy();
+        }
+        if (this.y < 0 - 16 || this.y > config.height + 16) {
             this.destroy();
         }
     }

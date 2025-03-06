@@ -7,7 +7,9 @@ class Player extends Phaser.GameObjects.Sprite {
       this.isFiring = false;
       this.moveSpeed = 2;
       this.health = 6;
-      this.sfxShot = scene.sound.add('sfx-shot');
+      this.forwardDir = new Phaser.Math.Vector2(0,1);
+      this.sfxShot = scene.sound.add('laser');
+      this.sfxShot.volume = .7;
       this.lasers = scene.add.group();
       this.lasers.runChildUpdate = true;
     }
@@ -15,39 +17,46 @@ class Player extends Phaser.GameObjects.Sprite {
     update(){
         // left/right movement
         if(KEY_LEFT.isDown){
-            this.flipX = false;
+            this.angle = 0;
             console.log("left")
             this.x -= this.moveSpeed;
+            this.forwardDir = new Phaser.Math.Vector2(-1,0);
         }
         else if(KEY_RIGHT.isDown){
-            this.flipX = true;
+            this.angle = 180;
             console.log("right")
             this.x += this.moveSpeed;
+            this.forwardDir = new Phaser.Math.Vector2(1,0);
         }
         else if(KEY_UP.isDown){
             console.log("up")
             this.y = 0;
             this.angle = 270;
+            this.forwardDir = new Phaser.Math.Vector2(0,1);
         }
         else if(KEY_DOWN.isDown){
             console.log("down")
             this.y = 800;
             this.angle = 90;
+            this.forwardDir = new Phaser.Math.Vector2(0,-1);
         }
         // fire button
         if (Phaser.Input.Keyboard.JustDown(KEY_FIRE) && !this.isFiring) {
             this.isFiring = true
             let laser = new Laser(this.scene, this.x, this.y, 'laser');
+            laser.angle = this.angle;
+            laser.body.setVelocity(this.forwardDir.x * 150, this.forwardDir.y * 150);
             this.lasers.add(laser);
             //laser.body.set
             this.sfxShot.play()
-            this.isFiring = false;
-        }
-    }
 
-    // reset rocket "to ground"
-    reset() {
-        this.isFiring = false;
-        this.y = game.config.height - borderUISize - borderPadding;
+            this.cooldown = this.scene.time.addEvent({
+                delay: 1000,
+                loop: false,
+                callback: () => {
+                    this.isFiring = false;
+                }
+            })
+        }
     }
 }
