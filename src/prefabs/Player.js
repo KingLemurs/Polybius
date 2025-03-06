@@ -15,10 +15,12 @@ class Player extends Phaser.GameObjects.Sprite {
     update(){
         // left/right movement
         if(KEY_LEFT.isDown){
+            this.flipX = false;
             console.log("left")
             this.x -= this.moveSpeed;
         }
         else if(KEY_RIGHT.isDown){
+            this.flipX = true;
             console.log("right")
             this.x += this.moveSpeed;
         }

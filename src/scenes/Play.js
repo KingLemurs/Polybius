@@ -25,9 +25,11 @@ class Play extends Phaser.Scene {
         this.core.angle = .01;
         this.mirrorCore = this.add.sprite(config.width / 2, config.height / 2, "mirrorcore");
         this.mirrorCoreDir = -1;
-
+        this.mirrorCoreSpeed = 0.077
+        
         this.core.on('attack', () => {
             this.mirrorCoreDir = this.core.direction;
+            this.mirrorCoreSpeed = Phaser.Math.Between(6, 9) / 100;
             console.log(`hi ${this.mirrorCoreDir}`)
         });
 
@@ -37,6 +39,7 @@ class Play extends Phaser.Scene {
             scaleY: -1,
             paused: true,
             ease: 'sine-inout',
+            hold: 1000,
             yoyo: true,
         })
 
@@ -110,7 +113,7 @@ class Play extends Phaser.Scene {
         if (this.cutscene) return;
 
         this.core.update();
-        this.mirrorCore.angle += .0777 * this.mirrorCoreDir;
+        this.mirrorCore.angle += this.mirrorCoreSpeed * this.mirrorCoreDir;
     }
 
     showMessage() {
