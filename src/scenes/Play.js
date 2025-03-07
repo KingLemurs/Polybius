@@ -22,6 +22,7 @@ class Play extends Phaser.Scene {
             //this.entity = new TheEntity(this, 387.5, 300, "entity")
 
         this.core = new TheEntity(this, config.width / 2, config.height / 2, "coresix");
+        this.core.body.setImmovable(true);
 
         this.core.angle = .01;
         this.mirrorCore = this.add.sprite(config.width / 2, config.height / 2, "mirrorcore");
@@ -36,6 +37,8 @@ class Play extends Phaser.Scene {
 
         this.mirrorTween = this.tweens.add({
             targets: this.mirrorCore,
+            x: this.core.x,
+            y: this.core.y,
             duration: 8000,
             scaleY: -1,
             paused: true,
@@ -55,6 +58,9 @@ class Play extends Phaser.Scene {
         // this.scoreText = this.add.text(10, 20, `Score: 0`, scoreConfig);
         this.level = 1;
         this.gameOver = false;
+
+        this.deathSound = this.sound.add('death');
+        this.deathSound.volume = 0.8;
 
         //this.cameras.main.startFollow(this.player, false, 1, 0, -100);
         this.cameras.main.setDeadzone(200, 200);
@@ -82,9 +88,24 @@ class Play extends Phaser.Scene {
                 emitting: false
             });
 
+            this.deathSound.play();
             emitter.explode(20);
             laser.destroy();
             enemy.destroy();
+        })
+
+        this.physics.add.collider(this.player, this.core.enemies, (player, enemy) => {
+            let emitter = this.add.particles(enemy.x, enemy.y, 'flame', {
+                lifespan: 600,
+                speedX: {min: -150, max: 150},
+                speedY: {min: -150, max: 150},
+                scale: {start: 1, end: .5},
+                blendMode: 'NORMAL',
+                tint: 0xFFFFFF,
+                emitting: false
+            });
+
+            emitter.explode(20);
         })
     }
 

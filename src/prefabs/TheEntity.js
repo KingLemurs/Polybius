@@ -15,12 +15,15 @@ class TheEntity extends Phaser.Physics.Arcade.Sprite {
         this.purples = new Array(5).fill(null); // max 5
         this.reds = new Array(5).fill(null); // max 5
 
+        this.spawnRedSound = scene.sound.add('spawnred');
+        this.spawnRedSound.volume = .4;
         this.spawnSound = scene.sound.add('spawn');
-        this.spawnSound.volume = .5;
+        this.spawnSound.volume = .3;
 
         // 1 seconds at start
         this.stateTimer = 60
         this.spawnTimer = 30;
+        this.redTimer = 120;
         this.direction = -1
         // every time state rolls idle
         this.aggression = 0
@@ -57,8 +60,8 @@ class TheEntity extends Phaser.Physics.Arcade.Sprite {
             this.aggression = 0;
             // atleast 5 seconds
             this.stateTimer = Phaser.Math.Between(300, 900)
-            this.newSpeed = Phaser.Math.Between(30, 50) / 100;
-            this.emit('attack');
+            this.newSpeed = Phaser.Math.Between(40, 60) / 100;
+            this.emit('attack', this);
         }
         else {
             this.state = "idle"
@@ -91,6 +94,31 @@ class TheEntity extends Phaser.Physics.Arcade.Sprite {
         this.setTexture(img);
     }
 
+    spawnRed() {
+        let nextEmpty = -1;
+        for (let i = 0; i < this.reds.length; i++) {
+            if (this.reds[i] == null) {
+                nextEmpty = i;
+                break;
+            }
+        }
+
+        // if all enemies are alive
+        if (nextEmpty < 0) {
+            return;
+        }
+
+        this.spawnRedSound.play();
+        this.redTimer = 120;
+        this.reds[nextEmpty] = new Red(this.scene, this.x, this.y, 'red', 0, this, nextEmpty);
+        this.reds[nextEmpty].on('destroy', () => {
+            this.reds[nextEmpty] = null;
+        })
+        this.enemies.add(this.reds[nextEmpty]);
+        this.on('attack', this.reds[nextEmpty].onCoreAttack);
+    }
+
+
     spawnOrange() {
         let nextEmpty = -1;
         for (let i = 0; i < this.oranges.length; i++) {
@@ -105,12 +133,13 @@ class TheEntity extends Phaser.Physics.Arcade.Sprite {
             return;
         }
 
-        this.spawnSound.play();
+        // this.spawnSound.play();
         this.oranges[nextEmpty] = new Orange(this.scene, this.x, this.y, 'orange', 0, this, nextEmpty);
         this.oranges[nextEmpty].on('destroy', () => {
             this.oranges[nextEmpty] = null;
         })
         this.enemies.add(this.oranges[nextEmpty]);
+        this.on('attack', this.oranges[nextEmpty].onCoreAttack);
     }
 
     spawnGreen() {
@@ -128,16 +157,17 @@ class TheEntity extends Phaser.Physics.Arcade.Sprite {
             return;
         }
 
-        this.spawnSound.play();
-        this.greens[nextEmpty] = new Enemy(this.scene, this.x, this.y, 'green', 0, this, nextEmpty);
+        this.greens[nextEmpty] = new Green(this.scene, this.x, this.y, 'green', 0, this, nextEmpty);
         this.greens[nextEmpty].on('destroy', () => {
             this.greens[nextEmpty] = null;
         })
         this.enemies.add(this.greens[nextEmpty]);
+        this.on('attack', this.greens[nextEmpty].onCoreAttack);
     }
 
     update(){
         this.angle += this.rotSpeed;
+        this.body.setVelocity(0,0);
         if (this.state === "idle") {
 
 
@@ -154,9 +184,13 @@ class TheEntity extends Phaser.Physics.Arcade.Sprite {
         }
 
         this.spawnTimer -= 1;
+        this.redTimer -= 1;
         if (this.spawnTimer <= 0) {
             this.spawnGreen();
             this.spawnOrange();
+        }
+        if (this.redTimer <= 0) {
+            this.spawnRed();
         }
 
         for (let i = 0; i < this.greens.length; i++) {
@@ -167,6 +201,11 @@ class TheEntity extends Phaser.Physics.Arcade.Sprite {
         for (let i = 0; i < this.oranges.length; i++) {
             if (this.oranges[i]) {
                 this.oranges[i].update();
+            }
+        }
+        for (let i = 0; i < this.reds.length; i++) {
+            if (this.reds[i]) {
+                this.reds[i].update();
             }
         }
     }

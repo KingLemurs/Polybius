@@ -25,6 +25,7 @@ class MainMenu extends Phaser.Scene {
         this.load.image('mirrorcore', 'mirrorCore.png')
         this.load.image('green', 'enemyGreen.png')
         this.load.image('orange', 'enemyOrange.png')
+        this.load.image('red', 'enemyRed.png')
         this.load.image('laser', 'beamTets.png')
         this.load.image('flame', 'flame.png')
 
@@ -33,7 +34,9 @@ class MainMenu extends Phaser.Scene {
         this.load.audio('sfx-shot', 'sfx-shot.wav');
         this.load.audio('laser', 'laserShot.mp3');
         this.load.audio('laser2', 'laserShot2.mp3');
-        this.load.audio('spawn', 'spawn.mp3');
+        this.load.audio('spawnred', 'spawn.mp3');
+        this.load.audio('spawn', 'spawnNormal.mp3');
+        this.load.audio('death', 'enemyDie.mp3');
     }
 
     create() {
