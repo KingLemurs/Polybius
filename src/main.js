@@ -2,8 +2,6 @@
 // Names: Nikolas Makranyi, Josh Gioffre
 // Date: 3/7/25
 
-// Around  hours spent
-
 "use strict"
 
 let config = {

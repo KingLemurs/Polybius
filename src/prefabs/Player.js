@@ -3,8 +3,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     constructor(scene, x, y, texture, frame) {
       super(scene, x, y, texture, frame);
       // add object to existing scene
-        scene.physics.add.existing(this);
       scene.add.existing(this);
+      scene.physics.add.existing(this);
       this.isFiring = false;
       this.moveSpeed = 2;
       this.health = 6;
@@ -13,6 +13,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
       this.sfxShot.volume = .7;
       this.lasers = scene.add.group();
       this.lasers.runChildUpdate = true;
+      this.setCollideWorldBounds(true);
     }
 
     update(){
@@ -27,13 +28,13 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         }
         else if(KEY_UP.isDown){
             console.log("up")
-            this.y = 0;
+            this.y = 25;
             this.angle = 270;
             this.forwardDir = new Phaser.Math.Vector2(0,1);
         }
         else if(KEY_DOWN.isDown){
             console.log("down")
-            this.y = 800;
+            this.y = 775;
             this.angle = 90;
             this.forwardDir = new Phaser.Math.Vector2(0,-1);
         }
