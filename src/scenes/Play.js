@@ -70,6 +70,22 @@ class Play extends Phaser.Scene {
         KEY_FIRE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         KEY_RESET = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
         KEY_MENU = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
+
+        this.physics.add.collider(this.player.lasers, this.core.enemies, (laser, enemy) => {
+            let emitter = this.add.particles(enemy.x, enemy.y, 'flame', {
+                lifespan: 600,
+                speedX: {min: -150, max: 150},
+                speedY: {min: -150, max: 150},
+                scale: {start: 1, end: .5},
+                blendMode: 'NORMAL',
+                tint: enemy.color,
+                emitting: false
+            });
+
+            emitter.explode(20);
+            laser.destroy();
+            enemy.destroy();
+        })
     }
 
     update() {

@@ -24,13 +24,16 @@ class MainMenu extends Phaser.Scene {
         this.load.image('coreone', 'coreOne.png')
         this.load.image('mirrorcore', 'mirrorCore.png')
         this.load.image('green', 'enemyGreen.png')
+        this.load.image('orange', 'enemyOrange.png')
         this.load.image('laser', 'beamTets.png')
+        this.load.image('flame', 'flame.png')
 
         // Load Audio
         this.load.path = "./assets/audio/";
         this.load.audio('sfx-shot', 'sfx-shot.wav');
         this.load.audio('laser', 'laserShot.mp3');
         this.load.audio('laser2', 'laserShot2.mp3');
+        this.load.audio('spawn', 'spawn.mp3');
     }
 
     create() {

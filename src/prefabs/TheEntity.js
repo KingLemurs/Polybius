@@ -9,16 +9,18 @@ class TheEntity extends Phaser.Physics.Arcade.Sprite {
         this.state = "idle";
 
         // enemy groups
+        this.enemies = scene.add.group();
         this.greens = new Array(10).fill(null); // max 10
-        this.yellows = new Array(10).fill(null); // max 10
+        this.oranges = new Array(10).fill(null); // max 10
         this.purples = new Array(5).fill(null); // max 5
         this.reds = new Array(5).fill(null); // max 5
 
-        console.log(this.greens)
+        this.spawnSound = scene.sound.add('spawn');
+        this.spawnSound.volume = .5;
 
         // 1 seconds at start
         this.stateTimer = 60
-        this.spawnTimer = 120;
+        this.spawnTimer = 30;
         this.direction = -1
         // every time state rolls idle
         this.aggression = 0
@@ -39,7 +41,7 @@ class TheEntity extends Phaser.Physics.Arcade.Sprite {
 
          SHAPES:
               GREEN - Circle shape that is the most stable. Follows direction of core steadily and only attacks outwards
-              YELLOW - Square shape that is less stable than greens. Faster and more erratic than greens.
+              ORANGE - Square shape that is less stable than greens. Faster and more erratic than greens.
               PURPLE - Special square shape that stays close to the core, and sometimes randomly shoots outwards
               RED - Most evil shape. Super unstable, will not follow the direction of core and can change speed rapidly
               WHITE - Large diamond shapes that spawn far out from the core, with the intent of hitting the player.
@@ -89,7 +91,29 @@ class TheEntity extends Phaser.Physics.Arcade.Sprite {
         this.setTexture(img);
     }
 
-    spawnEnemy() {
+    spawnOrange() {
+        let nextEmpty = -1;
+        for (let i = 0; i < this.oranges.length; i++) {
+            if (this.oranges[i] == null) {
+                nextEmpty = i;
+                break;
+            }
+        }
+
+        // if all enemies are alive
+        if (nextEmpty < 0) {
+            return;
+        }
+
+        this.spawnSound.play();
+        this.oranges[nextEmpty] = new Orange(this.scene, this.x, this.y, 'orange', 0, this, nextEmpty);
+        this.oranges[nextEmpty].on('destroy', () => {
+            this.oranges[nextEmpty] = null;
+        })
+        this.enemies.add(this.oranges[nextEmpty]);
+    }
+
+    spawnGreen() {
         let nextEmpty = -1;
         for (let i = 0; i < this.greens.length; i++) {
             if (this.greens[i] == null) {
@@ -97,14 +121,19 @@ class TheEntity extends Phaser.Physics.Arcade.Sprite {
                 break;
             }
         }
-        this.spawnTimer = 120;
+        this.spawnTimer = 30;
 
         // if all enemies are alive
         if (nextEmpty < 0) {
             return;
         }
 
+        this.spawnSound.play();
         this.greens[nextEmpty] = new Enemy(this.scene, this.x, this.y, 'green', 0, this, nextEmpty);
+        this.greens[nextEmpty].on('destroy', () => {
+            this.greens[nextEmpty] = null;
+        })
+        this.enemies.add(this.greens[nextEmpty]);
     }
 
     update(){
@@ -126,12 +155,18 @@ class TheEntity extends Phaser.Physics.Arcade.Sprite {
 
         this.spawnTimer -= 1;
         if (this.spawnTimer <= 0) {
-            this.spawnEnemy();
+            this.spawnGreen();
+            this.spawnOrange();
         }
 
         for (let i = 0; i < this.greens.length; i++) {
             if (this.greens[i]) {
                 this.greens[i].update();
+            }
+        }
+        for (let i = 0; i < this.oranges.length; i++) {
+            if (this.oranges[i]) {
+                this.oranges[i].update();
             }
         }
     }
