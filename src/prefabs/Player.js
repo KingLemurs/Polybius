@@ -17,16 +17,12 @@ class Player extends Phaser.GameObjects.Sprite {
     update(){
         // left/right movement
         if(KEY_LEFT.isDown){
-            this.angle = 0;
             console.log("left")
             this.x -= this.moveSpeed;
-            this.forwardDir = new Phaser.Math.Vector2(-1,0);
         }
         else if(KEY_RIGHT.isDown){
-            this.angle = 180;
             console.log("right")
             this.x += this.moveSpeed;
-            this.forwardDir = new Phaser.Math.Vector2(1,0);
         }
         else if(KEY_UP.isDown){
             console.log("up")
