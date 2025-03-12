@@ -19,17 +19,7 @@ let config = {
 
 let game = new Phaser.Game(config)
 
-let PLAYER_DRAG = 10;
-let PLAYER_MAX_DRAG = 700;
-let PLAYER_MAX_ROT = 90;
-let PLAYER_ROT_SPEED = 9;
-let PLAYER_FLYSPEED = 20;
 let PLAYER_MOVESPEED = 10;
-let PLAYER_MAX_FUEL = 10000;
-
-let GAME_SPEED = [2, 4, 6, 8, 10];
-let BLOCK_SPEED = [10, 15, 20, 35, 60];
-let ENGINE_RATE = [0.6, 0.8, 1, 1.2, 1.4];
 
 let KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_DOWN, KEY_RESET, KEY_MENU, KEY_START, KEY_FIRE, KEY_CREDITS;
 
