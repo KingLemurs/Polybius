@@ -46,6 +46,7 @@ class MainMenu extends Phaser.Scene {
         }
 
         KEY_START = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        KEY_CREDITS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.C);
 
         let titleConfig = {
             fontFamily: 'PolybiusFont',
@@ -69,6 +70,8 @@ class MainMenu extends Phaser.Scene {
             'Press (Space) to shoot', scoreConfig).setOrigin(0.5)
         this.add.text(game.config.width/2, game.config.height/2 - 32,
             'Objective: destroy the polygon in the middle', scoreConfig).setOrigin(0.5)
+        this.add.text(game.config.width/2, game.config.height/2 + 160,
+            'Press C to view Credits', scoreConfig).setOrigin(0.5)
         this.add.text(game.config.width/2, game.config.height/2 - 96,
             'Avoid the homing missiles', scoreConfig).setOrigin(0.5)
         this.add.text(game.config.width/2, game.config.height/2 + 280,
@@ -86,6 +89,9 @@ class MainMenu extends Phaser.Scene {
             this.time.delayedCall(1000, () => {
                 this.scene.start("playScene");
             })
+        }
+        if(Phaser.Input.Keyboard.JustDown(KEY_CREDITS)) {
+            this.scene.start("credits");
         }
     }
 }

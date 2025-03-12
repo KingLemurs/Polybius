@@ -1,8 +1,6 @@
 // Polybius
 // Names: Nikolas Makranyi, Josh Gioffre
-// Date: 3/7/25
-
-// Around  hours spent
+// Date: 3/14/25
 
 "use strict"
 
@@ -13,10 +11,10 @@ let config = {
     physics: {
         default: "arcade",
         arcade: {
-            debug: false
+            debug: true
         }
     },
-    scene: [Title, MainMenu, Play]
+    scene: [Title, MainMenu, Credits, Play, Ending]
 }
 
 let game = new Phaser.Game(config)
@@ -33,7 +31,7 @@ let GAME_SPEED = [2, 4, 6, 8, 10];
 let BLOCK_SPEED = [10, 15, 20, 35, 60];
 let ENGINE_RATE = [0.6, 0.8, 1, 1.2, 1.4];
 
-let KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_DOWN, KEY_RESET, KEY_MENU, KEY_START, KEY_FIRE;
+let KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_DOWN, KEY_RESET, KEY_MENU, KEY_START, KEY_FIRE, KEY_CREDITS;
 
 // story of game - you are a byte packet traveling through the internet trying to reach your destination.
 // Starts off with a computer command being typed into a command line "GET /index.html HTTP/1.1/"
