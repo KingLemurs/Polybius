@@ -128,7 +128,7 @@ class Play extends Phaser.Scene {
                 this.scene.start("ending");
             }
             else {
-                core.health -= 5;
+                core.health -= 2;
                 laser.destroy();
                 console.log(core.health);
             }

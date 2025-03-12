@@ -51,7 +51,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             this.sfxShot.play()
 
             this.cooldown = this.scene.time.addEvent({
-                delay: 900,
+                delay: 200,
                 loop: false,
                 callback: () => {
                     this.isFiring = false;
