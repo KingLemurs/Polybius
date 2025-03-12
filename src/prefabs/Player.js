@@ -10,7 +10,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
       this.health = 6;
       this.forwardDir = new Phaser.Math.Vector2(0,1);
       this.sfxShot = scene.sound.add('laser');
-      this.sfxShot.volume = .7;
+      this.sfxShot.volume = .9;
       this.lasers = scene.add.group();
       this.lasers.runChildUpdate = true;
     }
@@ -42,13 +42,13 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             this.isFiring = true
             let laser = new Laser(this.scene, this.x, this.y, 'laser');
             laser.angle = this.angle;
-            laser.body.setVelocity(this.forwardDir.x * 150, this.forwardDir.y * 150);
+            laser.body.setVelocity(this.forwardDir.x * 250, this.forwardDir.y * 250);
             this.lasers.add(laser);
             //laser.body.set
             this.sfxShot.play()
 
             this.cooldown = this.scene.time.addEvent({
-                delay: 1000,
+                delay: 900,
                 loop: false,
                 callback: () => {
                     this.isFiring = false;

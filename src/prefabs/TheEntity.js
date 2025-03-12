@@ -16,9 +16,9 @@ class TheEntity extends Phaser.Physics.Arcade.Sprite {
         this.reds = new Array(5).fill(null); // max 5
 
         this.spawnRedSound = scene.sound.add('spawnred');
-        this.spawnRedSound.volume = .4;
+        this.spawnRedSound.volume = .7;
         this.spawnSound = scene.sound.add('spawn');
-        this.spawnSound.volume = .3;
+        this.spawnSound.volume = .6;
 
         // 1 seconds at start
         this.stateTimer = 60
@@ -60,7 +60,7 @@ class TheEntity extends Phaser.Physics.Arcade.Sprite {
             this.aggression = 0;
             // atleast 5 seconds
             this.stateTimer = Phaser.Math.Between(300, 900)
-            this.newSpeed = Phaser.Math.Between(40, 60) / 100;
+            this.newSpeed = Phaser.Math.Between(50, 90) / 100;
             this.emit('attack', this);
         }
         else {
@@ -68,7 +68,7 @@ class TheEntity extends Phaser.Physics.Arcade.Sprite {
             this.aggression += 1;
             // atleast 3 seconds
             this.stateTimer = Phaser.Math.Between(180, 900)
-            this.newSpeed = Phaser.Math.Between(10, 20) / 100;
+            this.newSpeed = Phaser.Math.Between(10, 40) / 100;
         }
         let newDir = Phaser.Math.Between(0, 1);
         if (newDir === 0) {

@@ -16,8 +16,10 @@ class Play extends Phaser.Scene {
         this.cameras.main.zoom = .2;
         this.cutsceneTween.play();
         this.physics.world.setFPS(60)
+
         this.player = new Player(this, config.width / 2, 0, "spaceship")
         this.player.angle = 270;
+        this.player.body.setCollideWorldBounds(true);
         // this.laser = new Laser(this, 725, 300, "laser")
             //this.entity = new TheEntity(this, 387.5, 300, "entity")
 
