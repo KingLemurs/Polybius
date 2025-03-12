@@ -14,6 +14,8 @@ class Player extends Phaser.Physics.Arcade.Sprite {
       this.lasers = scene.add.group();
       this.lasers.runChildUpdate = true;
       this.setCollideWorldBounds(true);
+      this.body.setSize(30, 50);
+      this.body.setOffset(15, 10);
     }
 
     update(){

@@ -8,6 +8,8 @@ class TheEntity extends Phaser.Physics.Arcade.Sprite {
         scene.add.existing(this);
         this.state = "idle";
 
+        this.body.setSize(200, 200);
+
         // enemy groups
         this.enemies = scene.add.group();
         this.greens = new Array(10).fill(null); // max 10

@@ -106,6 +106,32 @@ class Play extends Phaser.Scene {
             });
 
             emitter.explode(20);
+            player.destroy();
+            this.gameOver = true;
+        })
+
+        this.physics.add.collider(this.player.lasers, this.core, (laser, core) => {
+            let emitter = this.add.particles(core.x, core.y, 'flame', {
+                lifespan: 600,
+                speedX: {min: -150, max: 150},
+                speedY: {min: -150, max: 150},
+                scale: {start: 1, end: .5},
+                blendMode: 'NORMAL',
+                tint: 0xFFFFFF,
+                emitting: false
+            });
+
+            if(core.health <= 0) {
+                this.deathSound.play();
+                emitter.explode(20);
+                laser.destroy();
+                this.scene.start("ending");
+            }
+            else {
+                core.health -= 5;
+                laser.destroy();
+                console.log(core.health);
+            }
         })
     }
 
