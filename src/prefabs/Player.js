@@ -36,7 +36,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         }
         else if(KEY_DOWN.isDown){
             console.log("down")
-            this.y = 775;
+            this.y = 750;
             this.angle = 90;
             this.forwardDir = new Phaser.Math.Vector2(0,-1);
         }
