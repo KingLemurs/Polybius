@@ -111,7 +111,7 @@ class Play extends Phaser.Scene {
         })
 
         this.physics.add.collider(this.player.lasers, this.core, (laser, core) => {
-            let emitter = this.add.particles(core.x, core.y, 'flame', {
+            let emitter = this.add.particles(laser.x, laser.y, 'flame', {
                 lifespan: 600,
                 speedX: {min: -150, max: 150},
                 speedY: {min: -150, max: 150},
@@ -129,6 +129,7 @@ class Play extends Phaser.Scene {
             }
             else {
                 core.health -= 2;
+                emitter.explode(20);
                 laser.destroy();
                 console.log(core.health);
             }
@@ -138,7 +139,7 @@ class Play extends Phaser.Scene {
     update() {
         let scoreConfig = {
             fontFamily: 'PolybiusFont',
-            fontSize: '36px',
+            fontSize: '50px',
             color: '#FFFFFF',
             align: 'left',
         }
