@@ -121,11 +121,31 @@ class Play extends Phaser.Scene {
                 emitting: false
             });
 
-            if(core.health <= 0) {
+            if (core.health <= 0) {
                 this.deathSound.play();
+                
+                let explosion = this.add.particles(core.x, core.y, 'flame', {
+                    lifespan: 1200,
+                    speedX: { min: -300, max: 300 },
+                    speedY: { min: -300, max: 300 },
+                    scale: { start: 2, end: 0 },
+                    blendMode: 'NORMAL',
+                    emitting: false,
+                    tint: 0xFF4500 
+                });
+
                 emitter.explode(20);
                 laser.destroy();
-                this.scene.start("ending");
+
+                for(let i = 0; i < 5; i++) {
+                    this.time.delayedCall(25, () => { 
+                        explosion.explode(100);
+                    });
+                }
+
+                this.time.delayedCall(2000, () => { 
+                    this.scene.start("ending"); 
+                });
             }
             else {
                 core.health -= 2;
