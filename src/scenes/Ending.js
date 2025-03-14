@@ -64,9 +64,37 @@ class Ending extends Phaser.Scene {
                 'HELP ME', scoreConfig).setOrigin(0.5)
             this.add.text(game.config.width/2, game.config.height/2 + 500,
                 'IM TRAPPED', scoreConfig).setOrigin(0.5)
-            this.time.delayedCall(1000, () => {
+            this.time.addEvent({
+                delay: 100,
+                callback: this.showMessage,
+                callbackScope: this,
+                loop: true,
+            });
+            
+            this.time.delayedCall(4000, () => {
                 this.scene.start("playScene");
             })
         }
+    }
+
+    showMessage() {
+        let x = Phaser.Math.Between(10, game.config.width - 200);
+        let y = Phaser.Math.Between(10, game.config.height - 50);
+        let messages = ['CANT BREAK FREE', 'HELP ME', 'IM TRAPPED', 'YOU CANNOT LEAVE'];
+        let rand = Phaser.Math.Between(0, messages.length - 1);
+    
+        let message = this.add.text(x, y, messages[rand], { 
+            fontFamily: 'PolybiusFont', 
+            fontSize: '50px', 
+            color: '#880808', 
+        });
+    
+        this.time.addEvent({
+            delay: 500,
+            callback: () => {
+                message.destroy();
+            },
+            callbackScope: this
+        });
     }
 }

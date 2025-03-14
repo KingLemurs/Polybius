@@ -138,7 +138,7 @@ class Play extends Phaser.Scene {
                 laser.destroy();
 
                 for(let i = 0; i < 5; i++) {
-                    this.time.delayedCall(25, () => { 
+                    this.time.delayedCall(100, () => { 
                         explosion.explode(100);
                     });
                 }
@@ -188,28 +188,9 @@ class Play extends Phaser.Scene {
             this.scene.start("mainMenu");
         }
 
-        this.time.addEvent({
-            delay: Phaser.Math.Between(4000, 15000),
-            callback: this.showMessage,
-            callbackScope: this,
-            loop: true
-        });
-
         if (this.cutscene) return;
 
         this.core.update();
         this.mirrorCore.angle += this.mirrorCoreSpeed * this.mirrorCoreDir;
-    }
-
-    showMessage() {
-        if(this.gameOver === false) {
-            this.message = this.add.text(10, 40, 'Homing Missiles Incoming', { fontFamily: 'Arial', fontSize: '20px', color: '#FFFFFF', align: 'left', padding: { top: 5, bottom: 5, }, });
-            this.time.addEvent({
-                delay: 3000,
-                callback: this.message.destroy(),
-                callbackScope: this,
-                loop: false
-            });
-        }
     }
 }
