@@ -51,7 +51,9 @@ class Credits extends Phaser.Scene {
 
         this.add.text(game.config.width/2, game.config.height/2 + 64, 'Assets made by Nikolas Makranyi and Josh Gioffre', scoreConfig).setOrigin(0.5)
         this.add.text(game.config.width/2, game.config.height/2 + 96, 'Gameplay + visuals inspired by Polybius recreation by Gunther', scoreConfig).setOrigin(0.5)
-        this.add.text(game.config.width/2, game.config.height/2 + 128, 'Press SPACE to go back', scoreConfig).setOrigin(0.5)
+        this.add.text(game.config.width/2, game.config.height/2 + 128, 'Polybius1981 Font by Grigoriy Sviridov', scoreConfig).setOrigin(0.5)
+        this.add.text(game.config.width/2, game.config.height/2 + 160, 'Link: https://www.dafont.com/polybius1981.font', scoreConfig).setOrigin(0.5)
+        this.add.text(game.config.width/2, game.config.height/2 + 224, 'Press SPACE to go back', scoreConfig).setOrigin(0.5)
     }
 
     update() {

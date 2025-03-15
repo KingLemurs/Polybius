@@ -80,6 +80,8 @@ class MainMenu extends Phaser.Scene {
 
     update() {
         if (Phaser.Input.Keyboard.JustDown(KEY_START)) {
+            this.children.removeAll();
+
             this.add.text(game.config.width/2, game.config.height/2 + 260,
                 'HELP ME', scoreConfig).setOrigin(0.5)
             this.add.text(game.config.width/2, game.config.height/2 - 90,
