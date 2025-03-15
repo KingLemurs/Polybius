@@ -65,7 +65,7 @@ class MainMenu extends Phaser.Scene {
 
         this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (Space) to start', scoreConfig).setOrigin(0.5)
         this.add.text(game.config.width/2, game.config.height/2 - 128,
-            'Control your ship by using the left, right, up, and down arrow keys', scoreConfig).setOrigin(0.5)
+            'Change your ship direction by using the left, right, up, and down arrow keys', scoreConfig).setOrigin(0.5)
         this.add.text(game.config.width/2, game.config.height/2 - 64,
             'Press (Space) to shoot', scoreConfig).setOrigin(0.5)
         this.add.text(game.config.width/2, game.config.height/2 - 32,
@@ -73,7 +73,7 @@ class MainMenu extends Phaser.Scene {
         this.add.text(game.config.width/2, game.config.height/2 + 160,
             'Press C to view Credits', scoreConfig).setOrigin(0.5)
         this.add.text(game.config.width/2, game.config.height/2 - 96,
-            'Avoid the homing missiles', scoreConfig).setOrigin(0.5)
+            'Move your ship by using WASD keys', scoreConfig).setOrigin(0.5)
         this.add.text(game.config.width/2, game.config.height/2 + 280,
             'Have fun', scoreConfig).setOrigin(0.5)
     }
