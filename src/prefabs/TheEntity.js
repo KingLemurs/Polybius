@@ -70,7 +70,7 @@ class TheEntity extends Phaser.Physics.Arcade.Sprite {
             this.aggression += 1;
             // atleast 3 seconds
             this.stateTimer = Phaser.Math.Between(180, 900)
-            this.newSpeed = Phaser.Math.Between(10, 40) / 100;
+            this.newSpeed = Phaser.Math.Between(20, 40) / 100;
         }
         let newDir = Phaser.Math.Between(0, 1);
         if (newDir === 0) {
