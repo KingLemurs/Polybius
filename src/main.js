@@ -21,7 +21,7 @@ let game = new Phaser.Game(config)
 
 let PLAYER_MOVESPEED = 10;
 
-let KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_DOWN, KEY_RESET, KEY_MENU, KEY_START, KEY_FIRE, KEY_CREDITS;
+let KEY_LEFT, KEY_RIGHT, KEY_UP, KEY_DOWN, KEY_RESET, KEY_MENU, KEY_START, KEY_FIRE, KEY_CREDITS, KEY_MOVELEFT, KEY_MOVERIGHT, KEY_MOVEUP, KEY_MOVEDOWN;
 
 // story of game - you are a byte packet traveling through the internet trying to reach your destination.
 // Starts off with a computer command being typed into a command line "GET /index.html HTTP/1.1/"

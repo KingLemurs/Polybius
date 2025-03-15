@@ -7,6 +7,7 @@ class Play extends Phaser.Scene {
     }
 
     create() {
+        this.gameOverText = false;
         this.cutsceneTween = this.tweens.add({
             targets: this.cameras.main,
             zoom: .8,
@@ -74,6 +75,10 @@ class Play extends Phaser.Scene {
         KEY_RIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
         KEY_UP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
         KEY_DOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
+        KEY_MOVELEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.A);
+        KEY_MOVERIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
+        KEY_MOVEUP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.W);
+        KEY_MOVEDOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         KEY_FIRE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         KEY_RESET = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
         KEY_MENU = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M);

@@ -19,26 +19,35 @@ class Player extends Phaser.Physics.Arcade.Sprite {
     }
 
     update(){
-        // left/right movement
         if(KEY_LEFT.isDown){
-            console.log("left")
             this.x -= this.moveSpeed;
+            this.angle = 0;
+            this.forwardDir = new Phaser.Math.Vector2(-1, 0);
         }
         else if(KEY_RIGHT.isDown){
-            console.log("right")
             this.x += this.moveSpeed;
+            this.angle = 180;
+            this.forwardDir = new Phaser.Math.Vector2(1, 0);
         }
-        else if(KEY_UP.isDown){
-            console.log("up")
-            this.y = 25;
-            this.angle = 270;
-            this.forwardDir = new Phaser.Math.Vector2(0,1);
+        if(KEY_UP.isDown){
+            this.angle = 90;
+            this.forwardDir = new Phaser.Math.Vector2(0, -1);
         }
         else if(KEY_DOWN.isDown){
-            console.log("down")
-            this.y = 750;
-            this.angle = 90;
-            this.forwardDir = new Phaser.Math.Vector2(0,-1);
+            this.angle = 270;
+            this.forwardDir = new Phaser.Math.Vector2(0, 1);
+        }
+        else if(KEY_MOVELEFT.isDown){
+            this.x -= this.moveSpeed;
+        }
+        else if(KEY_MOVERIGHT.isDown){
+            this.x += this.moveSpeed;
+        }
+        else if(KEY_MOVEUP.isDown){
+            this.y -= this.moveSpeed;
+        }
+        else if(KEY_MOVEDOWN.isDown){
+            this.y += this.moveSpeed;
         }
         // fire button
         if (Phaser.Input.Keyboard.JustDown(KEY_FIRE) && !this.isFiring) {
