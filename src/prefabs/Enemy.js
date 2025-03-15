@@ -138,7 +138,7 @@ class Red extends Enemy {
     }
 
     attack() {
-        this.distance += Phaser.Math.Between(-this.core.rotSpeed, this.core.rotSpeed * 2);
-        this.angle += Phaser.Math.Between(-this.core.rotSpeed, this.core.rotSpeed);
+        this.distance += Phaser.Math.Between(-this.core.rotSpeed * 3, this.core.rotSpeed * 3);
+        this.angle += Phaser.Math.Between(-this.core.rotSpeed * 2, this.core.rotSpeed * 2);
     }
 }

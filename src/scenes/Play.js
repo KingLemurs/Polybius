@@ -111,7 +111,7 @@ class Play extends Phaser.Scene {
         })
 
         this.physics.add.collider(this.player.lasers, this.core, (laser, core) => {
-            let emitter = this.add.particles(laser.x, laser.y, 'flame', {
+            let emitter = this.add.particles(core.x, core.y, 'flame', {
                 lifespan: 600,
                 speedX: {min: -150, max: 150},
                 speedY: {min: -150, max: 150},
@@ -121,35 +121,14 @@ class Play extends Phaser.Scene {
                 emitting: false
             });
 
-            if (core.health <= 0) {
+            if(core.health <= 0) {
                 this.deathSound.play();
-                
-                let explosion = this.add.particles(core.x, core.y, 'flame', {
-                    lifespan: 1200,
-                    speedX: { min: -300, max: 300 },
-                    speedY: { min: -300, max: 300 },
-                    scale: { start: 2, end: 0 },
-                    blendMode: 'NORMAL',
-                    emitting: false,
-                    tint: 0xFF4500 
-                });
-
                 emitter.explode(20);
                 laser.destroy();
-
-                for(let i = 0; i < 5; i++) {
-                    this.time.delayedCall(100, () => { 
-                        explosion.explode(100);
-                    });
-                }
-
-                this.time.delayedCall(2000, () => { 
-                    this.scene.start("ending"); 
-                });
+                this.scene.start("ending");
             }
             else {
-                core.health -= 2;
-                emitter.explode(20);
+                core.health -= 1;
                 laser.destroy();
                 console.log(core.health);
             }
@@ -159,7 +138,7 @@ class Play extends Phaser.Scene {
     update() {
         let scoreConfig = {
             fontFamily: 'PolybiusFont',
-            fontSize: '32px',
+            fontSize: '36px',
             color: '#FFFFFF',
             align: 'left',
         }
@@ -190,9 +169,28 @@ class Play extends Phaser.Scene {
             this.scene.start("mainMenu");
         }
 
+        this.time.addEvent({
+            delay: Phaser.Math.Between(4000, 15000),
+            callback: this.showMessage,
+            callbackScope: this,
+            loop: true
+        });
+
         if (this.cutscene) return;
 
         this.core.update();
         this.mirrorCore.angle += this.mirrorCoreSpeed * this.mirrorCoreDir;
+    }
+
+    showMessage() {
+        if(this.gameOver === false) {
+            this.message = this.add.text(10, 40, 'Homing Missiles Incoming', { fontFamily: 'Arial', fontSize: '20px', color: '#FFFFFF', align: 'left', padding: { top: 5, bottom: 5, }, });
+            this.time.addEvent({
+                delay: 3000,
+                callback: this.message.destroy(),
+                callbackScope: this,
+                loop: false
+            });
+        }
     }
 }
