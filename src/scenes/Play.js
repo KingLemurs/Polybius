@@ -3,6 +3,7 @@ class Play extends Phaser.Scene {
         // name of scene to phaser
         super("playScene")
         this.cutscene = true;
+        this.gameOverText = false;
     }
 
     create() {
@@ -123,12 +124,31 @@ class Play extends Phaser.Scene {
 
             if(core.health <= 0) {
                 this.deathSound.play();
+                let explosion = this.add.particles(core.x, core.y, 'flame', {
+                    lifespan: 1200,
+                    speedX: { min: -300, max: 300 },
+                    speedY: { min: -300, max: 300 },
+                    scale: { start: 2, end: 0 },
+                    blendMode: 'NORMAL',
+                    emitting: false,
+                    tint: 0xFF4500 
+                });
+
                 emitter.explode(20);
                 laser.destroy();
-                this.scene.start("ending");
+
+                for(let i = 0; i < 5; i++) {
+                    this.time.delayedCall(25, () => { 
+                        explosion.explode(100);
+                    });
+                }
+
+                this.time.delayedCall(2000, () => { 
+                    this.scene.start("ending"); 
+                });
             }
             else {
-                core.health -= 1;
+                core.health -= 2;
                 emitter.explode(20);
                 laser.destroy();
                 console.log(core.health);
@@ -153,13 +173,14 @@ class Play extends Phaser.Scene {
             })                   
         }
 
-        if(this.gameOver === true)
+        if(this.gameOver === true && this.gameOverText === false)
         {
             this.add.text(game.config.width / 2, game.config.height / 2, 'GAME OVER', scoreConfig).setOrigin(0.5)
             this.add.text(game.config.width / 2, game.config.height / 2 + 64, 'Press (R) to Restart or (M) for Menu', scoreConfig).setOrigin(0.5)
             this.player.setVisible(false);
             this.core.setVisible(false);
             this.mirrorCore.setVisible(false);
+            this.gameOverText = true;
         }
 
         if(this.gameOver && Phaser.Input.Keyboard.JustDown(KEY_RESET)) {
