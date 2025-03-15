@@ -1,3 +1,5 @@
+let score = 0;
+
 class Play extends Phaser.Scene {
     constructor() {
         // name of scene to phaser
@@ -20,6 +22,8 @@ class Play extends Phaser.Scene {
         this.physics.world.setFPS(60)
         this.player = new Player(this, config.width / 2, 25, "spaceship")
         this.player.angle = 270;
+        this.player.score = score;
+        this.player.scoreText.setText('Score: ' + score);
         // this.laser = new Laser(this, 725, 300, "laser")
             //this.entity = new TheEntity(this, 387.5, 300, "entity")
 
@@ -98,8 +102,8 @@ class Play extends Phaser.Scene {
             emitter.explode(20);
             laser.destroy();
             enemy.destroy();
-            this.player.score += 50;
-            this.player.scoreText.setText('Score: ' + this.player.score);
+            score += 50;
+            this.player.scoreText.setText('Score: ' + score);
         })
 
         this.physics.add.collider(this.player, this.core.enemies, (player, enemy) => {
@@ -143,7 +147,8 @@ class Play extends Phaser.Scene {
 
                 emitter.explode(20);
                 laser.destroy();
-                this.player.score += 1000;
+                score += 1000;
+                this.player.scoreText.setText('Score: ' + score);
 
                 for(let i = 0; i < 5; i++) {
                     this.time.delayedCall(25, () => { 
@@ -156,7 +161,7 @@ class Play extends Phaser.Scene {
                 });
             }
             else {
-                core.health -= 2;
+                core.health -= 10;
                 emitter.explode(20);
                 laser.destroy();
                 console.log(core.health);
@@ -192,10 +197,14 @@ class Play extends Phaser.Scene {
         }
 
         if(this.gameOver && Phaser.Input.Keyboard.JustDown(KEY_RESET)) {
+            this.player.score = 0;
+            score = 0;
             this.scene.restart();
         }
 
         if(this.gameOver && Phaser.Input.Keyboard.JustDown(KEY_MENU)) {
+            this.player.score = 0;
+            score = 0;
             this.scene.start("mainMenu");
         }
 
