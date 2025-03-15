@@ -98,6 +98,8 @@ class Play extends Phaser.Scene {
             emitter.explode(20);
             laser.destroy();
             enemy.destroy();
+            this.player.score += 50;
+            this.player.scoreText.setText('Score: ' + this.player.score);
         })
 
         this.physics.add.collider(this.player, this.core.enemies, (player, enemy) => {
@@ -141,6 +143,7 @@ class Play extends Phaser.Scene {
 
                 emitter.explode(20);
                 laser.destroy();
+                this.player.score += 1000;
 
                 for(let i = 0; i < 5; i++) {
                     this.time.delayedCall(25, () => { 

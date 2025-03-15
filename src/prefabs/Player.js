@@ -16,6 +16,14 @@ class Player extends Phaser.Physics.Arcade.Sprite {
       this.setCollideWorldBounds(true);
       this.body.setSize(30, 50);
       this.body.setOffset(15, 10);
+
+      this.score = 0;
+      this.scoreText = scene.add.text(1, 1, 'Score: 0', {
+          fontFamily: 'PolybiusFont',
+          fontSize: '32px',
+          color: '#fff'
+      });
+      this.scoreText.setOrigin(0, 0);
     }
 
     update(){
@@ -54,7 +62,6 @@ class Player extends Phaser.Physics.Arcade.Sprite {
             laser.angle = this.angle;
             laser.body.setVelocity(this.forwardDir.x * 250, this.forwardDir.y * 250);
             this.lasers.add(laser);
-            //laser.body.set
             this.sfxShot.play()
 
             this.cooldown = this.scene.time.addEvent({
