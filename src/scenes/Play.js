@@ -111,7 +111,7 @@ class Play extends Phaser.Scene {
         })
 
         this.physics.add.collider(this.player.lasers, this.core, (laser, core) => {
-            let emitter = this.add.particles(core.x, core.y, 'flame', {
+            let emitter = this.add.particles(laser.x, laser.y, 'flame', {
                 lifespan: 600,
                 speedX: {min: -150, max: 150},
                 speedY: {min: -150, max: 150},
