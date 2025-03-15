@@ -75,7 +75,7 @@ class Play extends Phaser.Scene {
         KEY_DOWN = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.DOWN);
         KEY_FIRE = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
         KEY_RESET = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
-        KEY_MENU = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
+        KEY_MENU = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M);
 
         this.physics.add.collider(this.player.lasers, this.core.enemies, (laser, enemy) => {
             let emitter = this.add.particles(enemy.x, enemy.y, 'flame', {
@@ -159,7 +159,7 @@ class Play extends Phaser.Scene {
     update() {
         let scoreConfig = {
             fontFamily: 'PolybiusFont',
-            fontSize: '50px',
+            fontSize: '32px',
             color: '#FFFFFF',
             align: 'left',
         }
@@ -167,14 +167,16 @@ class Play extends Phaser.Scene {
         if(!this.gameOver && !this.cutscene) {
             this.player.update();         
         }
-        if(this.player.health <= 0) {               
-            this.gameOver = true;         
+        if(this.player.health <= 0) {
+            this.time.delayedCall(1000, () => {
+                this.gameOver = true;
+            })                   
         }
 
         if(this.gameOver === true)
         {
             this.add.text(game.config.width / 2, game.config.height / 2, 'GAME OVER', scoreConfig).setOrigin(0.5)
-            this.add.text(game.config.width / 2, game.config.height / 2 + 64, 'Press (R) to Restart or <- for Menu', scoreConfig).setOrigin(0.5)
+            this.add.text(game.config.width / 2, game.config.height / 2 + 64, 'Press (R) to Restart or (M) for Menu', scoreConfig).setOrigin(0.5)
             this.player.setVisible(false);
             this.core.setVisible(false);
             this.mirrorCore.setVisible(false);
