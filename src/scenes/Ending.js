@@ -21,7 +21,7 @@ class Ending extends Phaser.Scene {
             EXP: this.EXP,
         }
 
-        KEY_START = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.SPACE);
+        KEY_START = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M);
 
         let titleConfig = {
             fontFamily: 'PolybiusFont',
