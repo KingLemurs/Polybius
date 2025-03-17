@@ -20,25 +20,17 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
 
     }
 
-    onCoreAttack(core) {
-        let attackChance = Phaser.Math.Between(0, 5);
-
-        /*
-        if (attackChance === 0) {
-            let shootDir = new Phaser.Math.Vector2(
-                this.x * this.x - core.x * core.x,
-                this.y * this.y - core.y * core.y);
-            shootDir.normalize();
-            this.body.setVelocity(shootDir * 50, shootDir * 50);
-            this.flung = true;
-        }
-        
-         */
-    }
+    onCoreAttack(core) {}
 
     attack() {
         this.distance += Phaser.Math.Between(0, this.core.rotSpeed / 3);
         this.angle += Phaser.Math.Between(-this.core.rotSpeed / 3, this.core.rotSpeed / 3);
+
+        let flingChance = Phaser.Math.Between(0, 500);
+
+        if (flingChance === 0) {
+            this.flung = true;
+        }
     }
 
     update() {
@@ -50,9 +42,11 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
         let newDir = new Phaser.Math.Vector2(newDestX - this.x, newDestY - this.y).normalize();
         // this.body.setVelocity(newDir.x * 100, newDir.y * 100);
         // this.scene.physics.moveTo(this, newDestX, newDestY, 60);
-        if (this.flung === false) {
-            Phaser.Actions.RotateAroundDistance([this], this.core, this.core.rotSpeed / 400, this.distance);
+        if (this.flung) {
+            this.distance += 1;
         }
+
+        Phaser.Actions.RotateAroundDistance([this], this.core, this.core.rotSpeed / 400, this.distance);
         // this.lastAngle = this.core.angle;
 
         let attackChance = Phaser.Math.Between(0, 2);
@@ -120,6 +114,12 @@ class Orange extends Enemy {
     attack() {
         this.distance += Phaser.Math.Between(0, this.core.rotSpeed / 2);
         this.angle += Phaser.Math.Between(-this.core.rotSpeed / 3, this.core.rotSpeed / 3);
+
+        let flingChance = Phaser.Math.Between(0, 500);
+
+        if (flingChance === 0) {
+            this.flung = true;
+        }
     }
 }
 
