@@ -161,7 +161,7 @@ class Play extends Phaser.Scene {
                 });
             }
             else {
-                core.health -= 3;
+                core.health -= 2;
                 emitter.explode(20);
                 laser.destroy();
                 console.log(core.health);
