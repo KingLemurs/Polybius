@@ -96,6 +96,29 @@ class TheEntity extends Phaser.Physics.Arcade.Sprite {
         this.setTexture(img);
     }
 
+    spawnPurple() {
+        let nextEmpty = -1;
+        for (let i = 0; i < this.purples.length; i++) {
+            if (this.purples[i] == null) {
+                nextEmpty = i;
+                break;
+            }
+        }
+
+        // if all enemies are alive
+        if (nextEmpty < 0) {
+            return;
+        }
+
+        this.spawnRedSound.play();
+        this.purples[nextEmpty] = new Purple(this.scene, this.x, this.y, 'purple', 0, this, nextEmpty);
+        this.purples[nextEmpty].on('destroy', () => {
+            this.purples[nextEmpty] = null;
+        })
+        this.enemies.add(this.purples[nextEmpty]);
+        this.on('attack', this.purples[nextEmpty].onCoreAttack);
+    }
+
     spawnRed() {
         let nextEmpty = -1;
         for (let i = 0; i < this.reds.length; i++) {
@@ -193,6 +216,7 @@ class TheEntity extends Phaser.Physics.Arcade.Sprite {
         }
         if (this.redTimer <= 0) {
             this.spawnRed();
+            this.spawnPurple()
         }
 
         for (let i = 0; i < this.greens.length; i++) {
@@ -208,6 +232,12 @@ class TheEntity extends Phaser.Physics.Arcade.Sprite {
         for (let i = 0; i < this.reds.length; i++) {
             if (this.reds[i]) {
                 this.reds[i].update();
+            }
+        }
+
+        for (let i = 0; i < this.purples.length; i++) {
+            if (this.purples[i]) {
+                this.purples[i].update();
             }
         }
     }

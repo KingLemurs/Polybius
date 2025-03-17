@@ -23,11 +23,17 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
     onCoreAttack(core) {
         let attackChance = Phaser.Math.Between(0, 5);
 
+        /*
         if (attackChance === 0) {
-            let angle = Phaser.Math.Angle.Between(this.x, this.y, core.x, core.y);
-            this.body.setVelocity(Math.cos(angle * 50), Math.sin(angle * 50));
+            let shootDir = new Phaser.Math.Vector2(
+                this.x * this.x - core.x * core.x,
+                this.y * this.y - core.y * core.y);
+            shootDir.normalize();
+            this.body.setVelocity(shootDir * 50, shootDir * 50);
             this.flung = true;
         }
+        
+         */
     }
 
     attack() {
@@ -57,6 +63,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
 
         if (this.x < 0 - this.body.width || this.x > config.width + this.body.width) {
             this.destroy();
+            return;
         }
         if (this.y < 0 - this.body.height || this.y > config.height + this.body.height) {
             this.destroy();
@@ -138,7 +145,48 @@ class Red extends Enemy {
     }
 
     attack() {
-        this.distance += Phaser.Math.Between(-this.core.rotSpeed * 3, this.core.rotSpeed * 3);
-        this.angle += Phaser.Math.Between(-this.core.rotSpeed * 2, this.core.rotSpeed * 2);
+        this.distance += Phaser.Math.Between(-this.core.rotSpeed * 4, this.core.rotSpeed * 8);
+        this.angle += Phaser.Math.Between(-this.core.rotSpeed * 5, this.core.rotSpeed * 10);
+    }
+}
+
+class Purple extends Enemy {
+    constructor(scene, x, y, texture, frame, core, index) {
+        super(scene, x, y, texture, frame, core, index);
+        this.distance = 135;
+        this.spawnOffset = 0;
+        this.index += 1;
+        this.duration = 2000;
+        this.color = 0xFF00FF
+
+        this.cutsceneTween = scene.tweens.add({
+            targets: this,
+            x: core.x + Math.cos((360 / 10) * Phaser.Math.DegToRad(this.index * 2 - 1)) * this.distance,
+            y: core.y + Math.sin((360 / 10) * Phaser.Math.DegToRad(this.index * 2 - 1)) * this.distance,
+            duration: this.duration,
+            ease: "sine-inout"
+        })
+        this.cutsceneTween.play();
+        this.cutsceneTween.on('complete', () => {
+            this.cutscene = false;
+        })
+    }
+
+    attack() {
+        this.distance += Phaser.Math.Between(0, this.core.rotSpeed / 2);
+        this.angle += Phaser.Math.Between(-this.core.rotSpeed / 3, this.core.rotSpeed / 3);
+
+        let attackChance = Phaser.Math.Between(0,200);
+
+        if (attackChance === 0) {
+            // shoot proj
+            let laser = new Laser(this.scene, this.x, this.y, 'laser');
+            this.core.enemies.add(laser);
+            let playerDir = new Phaser.Math.Vector2(
+                this.scene.player.x * this.scene.player.x - this.x * this.x,
+                this.scene.player.y * this.scene.player.y - this.y * this.y)
+            playerDir.normalize();
+            laser.body.setVelocity(playerDir.x * 150, playerDir.y * 150);
+        }
     }
 }

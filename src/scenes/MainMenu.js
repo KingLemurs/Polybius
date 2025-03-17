@@ -26,6 +26,7 @@ class MainMenu extends Phaser.Scene {
         this.load.image('green', 'enemyGreen.png')
         this.load.image('orange', 'enemyOrange.png')
         this.load.image('red', 'enemyRed.png')
+        this.load.image('purple', 'enemyPurple.png')
         this.load.image('laser', 'beamTets.png')
         this.load.image('flame', 'flame.png')
 
