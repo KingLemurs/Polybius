@@ -26,7 +26,7 @@ class Enemy extends Phaser.Physics.Arcade.Sprite {
         this.distance += Phaser.Math.Between(0, this.core.rotSpeed / 3);
         this.angle += Phaser.Math.Between(-this.core.rotSpeed / 3, this.core.rotSpeed / 3);
 
-        let flingChance = Phaser.Math.Between(0, 500);
+        let flingChance = Phaser.Math.Between(0, 800);
 
         if (flingChance === 0) {
             this.flung = true;
@@ -115,7 +115,7 @@ class Orange extends Enemy {
         this.distance += Phaser.Math.Between(0, this.core.rotSpeed / 2);
         this.angle += Phaser.Math.Between(-this.core.rotSpeed / 3, this.core.rotSpeed / 3);
 
-        let flingChance = Phaser.Math.Between(0, 500);
+        let flingChance = Phaser.Math.Between(0, 800);
 
         if (flingChance === 0) {
             this.flung = true;

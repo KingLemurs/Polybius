@@ -21,6 +21,8 @@ class TheEntity extends Phaser.Physics.Arcade.Sprite {
         this.spawnRedSound.volume = .7;
         this.spawnSound = scene.sound.add('spawn');
         this.spawnSound.volume = .6;
+        this.coreSound = scene.sound.add('core', {loop: true});
+        this.coreSound.volume = .2;
 
         // 1 seconds at start
         this.stateTimer = 60

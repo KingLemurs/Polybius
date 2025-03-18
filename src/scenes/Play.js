@@ -57,6 +57,7 @@ class Play extends Phaser.Scene {
             this.cutscene = false;
             this.mirrorTween.play();
             this.mirrorTween.paused = false;
+            this.core.coreSound.play();
         });
 
 
@@ -199,13 +200,13 @@ class Play extends Phaser.Scene {
         if(this.gameOver && Phaser.Input.Keyboard.JustDown(KEY_RESET)) {
             this.player.score = 0;
             score = 0;
-            this.scene.restart();
+            this.scene.start('mainMenu')
         }
 
         if(this.gameOver && Phaser.Input.Keyboard.JustDown(KEY_MENU)) {
             this.player.score = 0;
             score = 0;
-            this.scene.start("mainMenu");
+            this.scene.start("title");
         }
 
         this.time.addEvent({

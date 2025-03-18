@@ -38,6 +38,7 @@ class MainMenu extends Phaser.Scene {
         this.load.audio('spawnred', 'spawn.mp3');
         this.load.audio('spawn', 'spawnNormal.mp3');
         this.load.audio('death', 'enemyDie.mp3');
+        this.load.audio('core', 'core.mp3');
     }
 
     create() {
@@ -64,7 +65,7 @@ class MainMenu extends Phaser.Scene {
         this.add.text(game.config.width/2, game.config.height/2 - 200,
             'CONTROLS', titleConfig).setOrigin(0.5)
 
-        this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (Space) to start', scoreConfig).setOrigin(0.5)
+        this.startText = this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press (Space) to start', scoreConfig).setOrigin(0.5)
         this.add.text(game.config.width/2, game.config.height/2 - 128,
             'Change your ship direction by using the left, right, up, and down arrow keys', scoreConfig).setOrigin(0.5)
         this.add.text(game.config.width/2, game.config.height/2 - 64,
@@ -77,6 +78,12 @@ class MainMenu extends Phaser.Scene {
             'Move your ship by using WASD keys', scoreConfig).setOrigin(0.5)
         this.add.text(game.config.width/2, game.config.height/2 + 280,
             'Have fun', scoreConfig).setOrigin(0.5)
+
+        this.time.addEvent({
+            delay: 1000,
+            callback: () => {this.startText.visible = !this.startText.visible},
+            loop: true
+        });
     }
 
     update() {
