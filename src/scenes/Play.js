@@ -24,8 +24,6 @@ class Play extends Phaser.Scene {
         this.player.angle = 270;
         this.player.score = score;
         this.player.scoreText.setText('Score: ' + score);
-        // this.laser = new Laser(this, 725, 300, "laser")
-            //this.entity = new TheEntity(this, 387.5, 300, "entity")
 
         this.core = new TheEntity(this, config.width / 2, config.height / 2, "coresix");
         this.core.body.setImmovable(true);
@@ -71,7 +69,8 @@ class Play extends Phaser.Scene {
 
         console.log("play created")
         console.log(`HP: ${this.HP} EXP: ${this.EXP}`)
-
+        
+        // define keys
         KEY_LEFT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.LEFT);
         KEY_RIGHT = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.RIGHT);
         KEY_UP = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.UP);
@@ -84,6 +83,7 @@ class Play extends Phaser.Scene {
         KEY_RESET = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.R);
         KEY_MENU = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.M);
 
+        // colldiers for particle effects
         this.physics.add.collider(this.player.lasers, this.core.enemies, (laser, enemy) => {
             let emitter = this.add.particles(enemy.x, enemy.y, 'flame', {
                 lifespan: 600,
@@ -204,13 +204,6 @@ class Play extends Phaser.Scene {
             score = 0;
             this.scene.start("title");
         }
-
-        this.time.addEvent({
-            delay: Phaser.Math.Between(4000, 15000),
-            callback: this.showMessage,
-            callbackScope: this,
-            loop: true
-        });
 
         if (this.cutscene) return;
 

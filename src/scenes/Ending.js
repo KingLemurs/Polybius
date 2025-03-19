@@ -54,6 +54,7 @@ class Ending extends Phaser.Scene {
     }
 
     update() {
+        // display trippy text, and loop the game
         if (Phaser.Input.Keyboard.JustDown(KEY_START)) {
             this.children.removeAll();
             this.add.text(game.config.width/2, game.config.height/2 + 260,
@@ -78,6 +79,7 @@ class Ending extends Phaser.Scene {
     }
 
     showMessage() {
+        // display a message for a short period of time
         let x = Phaser.Math.Between(10, game.config.width - 200);
         let y = Phaser.Math.Between(10, game.config.height - 50);
         let messages = ['CANT BREAK FREE', 'HELP ME', 'IM TRAPPED', 'YOU CANNOT LEAVE'];

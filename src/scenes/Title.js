@@ -46,6 +46,7 @@ class Title extends Phaser.Scene {
             },
         }
 
+        // display title screen through text
         this.add.text(game.config.width/2, game.config.height/2 - 200,
             'POLYBIUS', titleConfig).setOrigin(0.5)
 

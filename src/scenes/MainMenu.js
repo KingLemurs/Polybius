@@ -62,6 +62,7 @@ class MainMenu extends Phaser.Scene {
             },
         }
 
+        // adding text
         this.add.text(game.config.width/2, game.config.height/2 - 200,
             'CONTROLS', titleConfig).setOrigin(0.5)
 
@@ -79,6 +80,7 @@ class MainMenu extends Phaser.Scene {
         this.add.text(game.config.width/2, game.config.height/2 + 280,
             'Have fun', scoreConfig).setOrigin(0.5)
 
+        // blinking text
         this.time.addEvent({
             delay: 1000,
             callback: () => {this.startText.visible = !this.startText.visible},
@@ -87,6 +89,7 @@ class MainMenu extends Phaser.Scene {
     }
 
     update() {
+        // checking if the player has pressed the start key
         if (Phaser.Input.Keyboard.JustDown(KEY_START)) {
             this.children.removeAll();
 
@@ -100,6 +103,8 @@ class MainMenu extends Phaser.Scene {
                 this.scene.start("playScene");
             })
         }
+        
+        // checking if the player has pressed the credits key
         if(Phaser.Input.Keyboard.JustDown(KEY_CREDITS)) {
             this.scene.start("credits");
         }

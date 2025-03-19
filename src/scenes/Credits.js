@@ -46,6 +46,7 @@ class Credits extends Phaser.Scene {
             },
         }
 
+        // display credits
         this.add.text(game.config.width/2, game.config.height/2 - 200,
             'Credits', titleConfig).setOrigin(0.5)
 

@@ -51,8 +51,6 @@ class TheEntity extends Phaser.Physics.Arcade.Sprite {
               ORANGE - Square shape that is less stable than greens. Faster and more erratic than greens.
               PURPLE - Special square shape that stays close to the core, and sometimes randomly shoots outwards
               RED - Most evil shape. Super unstable, will not follow the direction of core and can change speed rapidly
-              WHITE - Large diamond shapes that spawn far out from the core, with the intent of hitting the player.
-                      Sometimes have numbers attached to them.
          */
     }
 

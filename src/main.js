@@ -4,6 +4,7 @@
 // Citations: Polybius1981 Font by Grigoriy Sviridov, found on https://www.dafont.com/polybius1981.font; all other assets by us
 
 // Major Components used: Physics systems, text objects, tween manager, timers, cameras, particle effects
+// Polish and Style: In our game, we designed all of the enemy and player assets, which were inspired by a recreation of the supposed original game. We also got the core to spin, and included various particle effects, to make the experience more engaging. Each of the enemy types has different behaviors, which adds variety to the gameplay.
 
 "use strict"
 
