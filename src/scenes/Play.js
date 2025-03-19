@@ -60,16 +60,12 @@ class Play extends Phaser.Scene {
             this.core.coreSound.play();
         });
 
-
-        // this.engineText = this.add.text(10, 40, `Engine Level: ${this.player.engineLevel}`, scoreConfig);
-        // this.scoreText = this.add.text(10, 20, `Score: 0`, scoreConfig);
         this.level = 1;
         this.gameOver = false;
 
         this.deathSound = this.sound.add('death');
         this.deathSound.volume = 0.8;
 
-        //this.cameras.main.startFollow(this.player, false, 1, 0, -100);
         this.cameras.main.setDeadzone(200, 200);
         this.cameras.main.setBackgroundColor();
 
@@ -220,17 +216,5 @@ class Play extends Phaser.Scene {
 
         this.core.update();
         this.mirrorCore.angle += this.mirrorCoreSpeed * this.mirrorCoreDir;
-    }
-
-    showMessage() {
-        if(this.gameOver === false) {
-            this.message = this.add.text(10, 40, 'Homing Missiles Incoming', { fontFamily: 'Arial', fontSize: '20px', color: '#FFFFFF', align: 'left', padding: { top: 5, bottom: 5, }, });
-            this.time.addEvent({
-                delay: 3000,
-                callback: this.message.destroy(),
-                callbackScope: this,
-                loop: false
-            });
-        }
     }
 }

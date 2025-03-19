@@ -49,7 +49,7 @@ class Ending extends Phaser.Scene {
         this.add.text(game.config.width/2, game.config.height/2 - 200,
             'CONGRATS, YOU WON!', titleConfig).setOrigin(0.5)
 
-        this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press SPACE to Return to Menu', scoreConfig).setOrigin(0.5)
+        this.add.text(game.config.width/2, game.config.height/2 + 64, 'Press M to Return to Menu', scoreConfig).setOrigin(0.5)
         this.add.text(game.config.width/2, game.config.height/2 + 96, 'It is over now, right?', scoreConfig).setOrigin(0.5)
     }
 

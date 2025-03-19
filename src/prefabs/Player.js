@@ -55,6 +55,7 @@ class Player extends Phaser.Physics.Arcade.Sprite {
         else if(KEY_MOVEDOWN.isDown){
             this.y += this.moveSpeed;
         }
+        
         // fire button
         if (Phaser.Input.Keyboard.JustDown(KEY_FIRE) && !this.isFiring) {
             this.isFiring = true
